@@ -1,0 +1,45 @@
+<div style="width: 60vw;">
+    <h1 style="color: darkcyan;">Question {{ questionNum }}</h1>
+    <h3>{{ question }}</h3>
+    <div class="w3-container">
+        <div class="w3-cell-row w3-margin-bottom" onclick="registerChoice('a')">
+            <div class="w3-container w3-cyan" style="display: inline-block" id="aOpt">
+                <p>A</p>
+            </div>
+            <div class="w3-container w3-pale-blue" style="display: inline-block; width: 30vw; cursor:pointer;" id="aChoice">
+                <p>{{ choiceA }}</p>
+            </div>
+        </div>
+
+        <div class="w3-cell-row w3-margin-bottom" onclick="registerChoice('b')">
+            <div class="w3-container w3-cyan" style="display: inline-block" id="bOpt">
+                <p>B</p>
+            </div>
+            <div class="w3-container w3-pale-blue" style="display: inline-block; width: 30vw; cursor:pointer;" id="bChoice">
+                <p>{{ choiceB }}</p>
+            </div>
+        </div>
+        <div class="w3-cell-row w3-margin-bottom" onclick="registerChoice('c')">
+            <div class="w3-container w3-cyan" style="display: inline-block" id="cOpt">
+                <p>C</p>
+            </div>
+            <div class="w3-container w3-pale-blue" style="display: inline-block; width: 30vw; cursor:pointer;" id="cChoice">
+                <p>{{ choiceC }}</p>
+            </div>
+        </div>
+        <div class="w3-cell-row w3-margin-bottom" onclick="registerChoice('d')">
+            <div class="w3-container w3-cyan" style="display: inline-block" id="dOpt">
+                <p>D</p>
+            </div>
+            <div class="w3-container w3-pale-blue" style="display: inline-block; width: 30vw; cursor:pointer;" id="dChoice">
+                <p>{{ choiceD }}</p>
+            </div>
+        </div>
+    </div>
+    <button class="w3-button w3-pink w3-right w3-margin-top" onclick="displayResults()" id="submit">Submit</button>
+    <div class="w3-container w3-hide" id="correctWrap">
+        <h3 style="color: coral">The correct answer is <span id="correctAns"><b>{{correct}}</b></span>.<br>
+            Please proceed to the next question.</h3>
+    </div>
+
+</div>

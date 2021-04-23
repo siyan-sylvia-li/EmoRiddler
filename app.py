@@ -2,6 +2,7 @@ from flask import Flask, render_template, session
 from flask import request
 from flask_session import Session
 from flask_cors import CORS
+import json
 app = Flask(__name__)
 
 SECRET_KEY ='EmoRiddler'
@@ -37,12 +38,26 @@ def emotion():
     img = data['usr_img']
     # Emotion recognition here
     emo = "happy"
-    return resp(emotion)
+    return {"res": "1"}
 
 
-def resp(emotion):
+@app.route('/response', methods=['GET'])
+def resp():
     return {"response": "Good job!"}
 
+
+@app.route('/question')
+def question():
+    questNum = int(request.args.get('questNum'))
+    with open('static/questions/q' + str(questNum) + '.json') as f:
+        quest = json.load(f)
+    return render_template('question.html', questionNum=str(questNum),
+                           question=quest['question'],
+                           choiceA=quest['choiceA'],
+                           choiceB=quest['choiceB'],
+                           choiceC=quest['choiceC'],
+                           choiceD=quest['choiceD'],
+                           correct=quest['correct'])
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)

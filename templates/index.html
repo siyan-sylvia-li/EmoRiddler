@@ -41,10 +41,7 @@
         position: fixed; top: 50%; left: 50%; transform: translate(-40%, -50%); display: inline-block">
         <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%);" id="display-content"></div>
         <div class="w3-bar w3-block w3-display-bottommiddle" style="width: 100%;">
-            <button class="w3-block w3-button w3-bar-item w3-teal w3-border w3-hide" id="prev" style="width: 50%"
-                    onclick="movePage(-1)">< Previous
-            </button>
-            <button class="w3-block w3-button w3-bar-item w3-teal w3-border w3-right" id="next" style="width: 50%"
+            <button class="w3-block w3-button w3-bar-item w3-teal w3-border" id="next" style="width: 100%"
                     onclick="movePage(1)">Next >
             </button>
         </div>
@@ -55,6 +52,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/setup.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/advancePage.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/videoUp.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/question.js') }}"></script>
 <script>
     var video = document.getElementById("videoElement");
     var canvas = document.createElement('canvas');
