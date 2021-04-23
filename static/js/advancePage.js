@@ -14,7 +14,10 @@ function movePage(direction) {
             sessionStorage.removeItem((page - startNum).toString() + "Choice");
         }
     } else {
-        $('#display-content').load('/p' + sessionStorage.getItem('page'))
+        $('#display-content').load('/p' + sessionStorage.getItem('page'));
+        if (page === startNum) {
+            updateUI({'response': "Hi, I'm Mindy. Let's Do This! :)"})
+        }
     }
 
     // const prev = document.getElementById('prev');

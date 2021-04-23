@@ -3,6 +3,7 @@ from flask import request
 from flask_session import Session
 from flask_cors import CORS
 import json
+import base64
 app = Flask(__name__)
 
 SECRET_KEY ='EmoRiddler'
@@ -39,6 +40,12 @@ def emotion():
     # Emotion recognition here
     emo = "happy"
     return {"res": "1"}
+
+
+@app.route('/agentImg')
+def agentImg():
+    encoded = base64.b64encode(open("static/imgs/agent.png", "rb").read())
+    return encoded
 
 
 @app.route('/response', methods=['GET'])
