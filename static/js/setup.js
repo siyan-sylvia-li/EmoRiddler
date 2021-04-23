@@ -9,7 +9,7 @@ function defer(method) {
 function generateID() {
     if (sessionStorage.getItem('participantID') == null) {
         const ID = Math.floor(1000 + Math.random() * 9000);
-        sessionStorage.setItem('participantID', '<b>' + ID.toString() + '</b>');
+        sessionStorage.setItem('participantID', ID.toString());
     }
     const partID = document.getElementById("partID");
     partID.appendChild(document.createTextNode(sessionStorage.getItem('participantID')));
