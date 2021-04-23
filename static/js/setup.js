@@ -21,8 +21,5 @@ function setup() {
     defer(function () {
         generateID();
     })
-    if (sessionStorage.getItem('page') == null) {
-       sessionStorage.setItem('page', '0');
-    }
-
+    sessionStorage.setItem('page', '0');
 }
