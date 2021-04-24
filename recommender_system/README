@@ -1,0 +1,2 @@
+Recommender system to provide responses based on user emotion. The argument provided to the python script must be a list of emotions, for example: ["sad","neutral","angry"].
+The emotions accepted include happy, neutral, surprise, angry, sad, disgust and fear.
