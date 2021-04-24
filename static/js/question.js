@@ -69,9 +69,9 @@ function updateUI(result) {
     // Panel
     const wrap = document.createElement('div');
     wrap.setAttribute("class", "w3-panel w3-pale-green w3-cell-row")
-    wrap.setAttribute("style", "padding-left:0;")
+    wrap.setAttribute("style", "padding-left:0; max-width: 20vw;")
     const imgWrap = document.createElement('div')
-    imgWrap.setAttribute("style", "width: 3vw; height: 3vw; display: inline-block; vertical-align: top;")
+    imgWrap.setAttribute("style", "width: 3vw; height: 3vw; vertical-align: top;")
     imgWrap.setAttribute("class", "w3-cell")
     // Image of Mindy
     const agentImg = document.createElement('img')

@@ -21,6 +21,7 @@ def index():
 
 @app.route('/p0')
 def pg0():
+    session['time'] = 0
     return render_template('page_0.html')
 
 
@@ -32,6 +33,19 @@ def pg1():
 @app.route('/p2')
 def pg2():
     return render_template('page_2.html')
+
+
+@app.route('/feedback')
+def feedback():
+    session['time'] = session['time'] + 1
+    return render_template('feedback.html', partID=session['partID'], time=str(session['time']))
+
+
+@app.route('/partID', methods=['POST'])
+def partID():
+    data = request.json
+    session['partID'] = data['partID']
+    return {'partID': session['partID']}
 
 
 @app.route('/emotion', methods=['POST'])

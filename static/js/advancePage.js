@@ -1,5 +1,6 @@
 const startNum = 2;
 const endNum = 20;
+const evalInterval = 5;
 function movePage(direction) {
     $( "#display-content" ).empty();
     // Load items for the specific page
@@ -7,12 +8,19 @@ function movePage(direction) {
     page = page + direction;
     sessionStorage.setItem('page', page.toString())
     if (page > startNum && page < endNum) {
-        // Load questions
-        $('#display-content').load('/question?questNum=' + (page - startNum).toString())
-        if (sessionStorage.getItem((page - startNum).toString() + "Choice") !== null) {
-            // Need to clear choices
-            sessionStorage.removeItem((page - startNum).toString() + "Choice");
+        if ((page - startNum) % evalInterval === 0) {
+            $('#display-content').load('/feedback')
+            updateUI({'response': "Please fill out the survey about your experience so far! Thank you :)"})
+        } else {
+            const qNum = (page - startNum) - Math.floor((page - startNum) / evalInterval)
+            // Load questions
+            $('#display-content').load('/question?questNum=' + qNum.toString())
+            if (sessionStorage.getItem(qNum.toString() + "Choice") !== null) {
+                // Need to clear choices
+                sessionStorage.removeItem(qNum.toString() + "Choice");
+            }
         }
+
     } else {
         $('#display-content').load('/p' + sessionStorage.getItem('page'));
         if (page === startNum) {
