@@ -1,0 +1,1 @@
+Emotion Recognition system obtains an image and performs emotion classification using CNN. Emotions recognized are happy, neutral, surprise, angry, sad, disgust and fear. Takes image as input and returns a list of emotions.
