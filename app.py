@@ -4,6 +4,7 @@ from flask_session import Session
 from flask_cors import CORS
 import json
 import base64
+from recommender_system import recommender_system
 app = Flask(__name__)
 
 SECRET_KEY ='EmoRiddler'
@@ -39,18 +40,14 @@ def emotion():
     img = data['usr_img']
     # Emotion recognition here
     emo = "happy"
+    session['emotions'] = ['happy', 'angry', 'neutral']
     return {"res": "1"}
-
-
-@app.route('/agentImg')
-def agentImg():
-    encoded = base64.b64encode(open("static/imgs/agent.png", "rb").read())
-    return encoded
 
 
 @app.route('/response', methods=['GET'])
 def resp():
-    return {"response": "Good job!"}
+    resp = recommender_system.emotional_response(session['emotions'])
+    return {"response": resp}
 
 
 @app.route('/question')
