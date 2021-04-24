@@ -9,8 +9,6 @@ Original file is located at
 # Recommender system
 """
 
-cd /content/drive/MyDrive/Coursework/CS 534/Project
-
 import numpy as np
 import random
 import numpy as np
