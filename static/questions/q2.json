@@ -1,8 +1,8 @@
 {
-  "question": "What are the six basic emotions according to Paul Ekman?",
-  "choiceA": "Fear, anger, contempt, sadness, disgust, and surprise",
-  "choiceB": "Fear, anger, joy, sadness, disgust, and surprise",
-  "choiceC": "Anxiety, anger, happiness, sadness, disgust, and surprise",
-  "choiceD": "Fear, rage, worry, sadness, disgust, and surprise",
-  "correct": "B"
+  "question": "Decision theory is defined as the “study of an agent’s choices”. Which of the following axioms does decision theory NOT satisfy?",
+  "choiceA": "Outcomes can be described by a utility function (a function which can describe the happiness derived from achieving this state)",
+  "choiceB": "Outcomes can be described by a probability function which describes the likelihood that this state might be achieved in the future",
+  "choiceC": "Decisions can be estimated based on probability",
+  "choiceD": "Decisions can be estimated based on expected utility",
+  "correct": "C"
 }
