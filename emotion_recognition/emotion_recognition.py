@@ -15,6 +15,7 @@ def emotion_recognition(image):
     algo = client.algo('util/SmartImageDownloader/0.2.20')
     algo.set_options(timeout=300)  # optional
     new_img_path = algo.pipe(input).result['savePath']
+    # print(new_img_path)
 
     input_emotion_recognition = {
         "image": new_img_path[0],
@@ -23,6 +24,7 @@ def emotion_recognition(image):
 
     algo = client.algo('deeplearning/EmotionRecognitionCNNMBP/1.0.1')
     result = algo.pipe(input_emotion_recognition).result
+    # print(result)
 
     # print(result)
     temp = result
@@ -31,6 +33,7 @@ def emotion_recognition(image):
     temp_dict = temp_1[0]
     for x in temp_dict['emotions']:
         print(x['label'])
+    return [x['label'] for x in temp_dict['emotions']]
 
 
 if __name__ == "__main__":

@@ -21,6 +21,15 @@ function registerChoice(choice) {
 }
 
 function displayResults() {
+    document.getElementById("next").disabled = true;
+    const correct = document.getElementById("correctWrap")
+    correct.className = correct.className + " w3-show";
+    for (var count = 0;  count < 10; count = count + 1) {
+        setTimeout(function(){
+            uploadSnap();
+        }, 500);
+    }
+    console.log("UPLOAD SNAPS")
     const correctAns = document.getElementById("correctAns").innerText.toLowerCase();
     console.log("Correct Answer", correctAns)
     const optCo = document.getElementById(correctAns + 'Opt')
@@ -41,8 +50,6 @@ function displayResults() {
     } else {
         sessionStorage.setItem(questNum.toString() + "Choice", "correct")
     }
-    const correct = document.getElementById("correctWrap")
-    correct.className = correct.className + " w3-show";
     document.getElementById("submit").disabled = true;
     requestResponse();
 }
@@ -58,6 +65,7 @@ function requestResponse() {
         .then(result => {
             console.log(result);
             updateUI(result);
+            document.getElementById("next").disabled = false;
         })
         .catch(error => {
             console.error('Error:', error);

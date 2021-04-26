@@ -22,7 +22,7 @@
     </div>
     <div id="container" style="display: inline-block;">
         <div class="w3-container w3-margin-bottom w3-margin-top" style="background-color: floralwhite" id="videoWrap">
-            <video id="videoElement" style="width: 18vw; height: 20vh;" autoplay="autoplay" ></video>
+            <video id="videoElement" style="width: 18vw; height: 20vh;" autoplay ></video>
 <!--            autoplay="true" id="videoElement" class= "w3-center w3-margin-top"
                    style="width: 18vw; height: auto;"-->
 <!--            <canvas class="w3-center w3-margin-top" id="canvas"></canvas>-->
@@ -54,17 +54,16 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/videoUp.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/question.js') }}"></script>
 <script>
-    var video = document.getElementById("videoElement");
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext('2d');
-    var w, h;
+    const video = document.getElementById("videoElement");
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({video: true})
             .then(function (stream) {
                 video.srcObject = stream;
-                canvas.width = window.visualViewport.width * 0.18;
-                canvas.height = window.visualViewport.height * 0.2;
+                canvas.width = video.clientWidth;
+                canvas.height = video.clientHeight;
             })
             .catch(function (err0r) {
                 console.log("Something went wrong!");

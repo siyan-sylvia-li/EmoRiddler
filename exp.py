@@ -1,0 +1,14 @@
+from base64 import b64decode
+
+data_uri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACNCAYAAADB9ipIAAACpklEQVR4Xu3SAQ0AAAjDMO7fNDqWFAXP6M4pEC2w6G6zFTh4IcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFsA3uzrDIeXgWwBeLOvMxxeBrIF4M2+znB4GcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFsA3uzrDIeXgWwBeLOvMxxeBrIF4M2+znB4GcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFsA3uzrDIeXgWwBeLOvMxxeBrIF4M2+znB4GcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFsA3uzrDIeXgWwBeLOvMxxeBrIF4M2+znB4GcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFsA3uzrDIeXgWwBeLOvMxxeBrIF4M2+znB4GcgWgDf7OsPhZSBbAN7s6wyHl4FsAXizrzMcXgayBeDNvs5weBnIFoA3+zrD4WUgWwDe7OsMh5eBbAF4s68zHF4GsgXgzb7OcHgZyBaAN/s6w+FlIFvgAZ1cAI4ljDoqAAAAAElFTkSuQmCC"
+# Python 2 and <Python 3.4
+# header, encoded = data_uri.split(",", 1)
+# data = b64decode(encoded)
+
+# Python 3.4+
+from urllib import request
+with request.urlopen(data_uri) as response:
+    data = response.read()
+
+with open("image.png", "wb") as f:
+    f.write(data)
