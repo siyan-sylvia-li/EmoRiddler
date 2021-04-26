@@ -6,10 +6,11 @@ def emotion_voting(emo_list):
 
     print(emotion_dict)
 
-    my_keys = sorted(emotion_dict, key=emotion_dict.get, reverse=True)[:3]
-    print(my_keys)
-    print(type(my_keys))
-    return my_keys
+    # my_keys = sorted(emotion_dict, key=emotion_dict.get, reverse=True)[:3]
+    # print(my_keys)
+    # print(type(my_keys))
+    # return my_keys
+    return emotion_dict
 
 
 if __name__ == "__main__":

@@ -14,12 +14,9 @@ import urllib.request
 from fer import FER
 from fer.exceptions import InvalidImage
 import cv2
+from multiprocessing import Pool, Process
 
 app = Flask(__name__)
-emotions = []
-taskQueue = []
-thresh = 0.05
-bufferCount = 0
 
 SECRET_KEY ='EmoRiddler'
 SESSION_TYPE = 'filesystem'
@@ -41,16 +38,10 @@ class Compute(Thread):
             f.write(data)
         self.img_cv = cv2.imread("static/imgs/buffer" + str(bufferCount) + ".png")
         bufferCount = bufferCount + 1
-        #     data = 'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUAAAhwAAAFoCAYAAAA.......'
-        # response = urllib.request.urlopen(data)
-        # with open('image.jpg', 'wb') as f:
-        #     f.write(response.file.read())
 
     def run(self):
         global emotions, taskQueue, thresh
         print("start")
-        # emo_labels = emotion_recognition(self.img)
-        # session['emotions'].extend(emo_labels)
         x = len(taskQueue)
         taskQueue.append(x)
         try:
@@ -62,8 +53,6 @@ class Compute(Thread):
                 res = res[0]['emotions']
                 emos = [e for e in res if res[e] > thresh]
                 emotions.extend(emos)
-            # emo, score = detector.top_emotion(self.img_cv)
-            # emotions.append(emo)
         except InvalidImage:
             print("Invalid Image")
         except IndexError:
@@ -72,6 +61,30 @@ class Compute(Thread):
         print("done")
         return
 
+
+def non_thread_emotion(img, buf, emots):
+    with urllib.request.urlopen(img) as response:
+        data = response.read()
+    if os.path.exists("static/imgs/buffer" + str(buf) + ".png"):
+        os.remove("static/imgs/buffer" + str(buf) + ".png")
+    with open("static/imgs/buffer" + str(buf) + ".png", "wb+") as f:
+        f.write(data)
+    img_cv = cv2.imread("static/imgs/buffer" + str(buf) + ".png")
+    try:
+        detector = FER(mtcnn=True)
+        print("DETECT")
+        res = detector.detect_emotions(img_cv)
+        print(res)
+        if len(res):
+            res = res[0]['emotions']
+            emos = [e for e in res if res[e] > thresh]
+            emots.extend(emos)
+            # return emos
+    except InvalidImage:
+        print("Invalid Image")
+    except IndexError:
+        print("Index Error")
+    # return []
 
 @app.route('/')
 def index():
@@ -118,25 +131,55 @@ def partID():
 
 @app.route('/emotion', methods=['POST'])
 def emotion():
-    global bufferCount
+    global bufferCount, emotions
     data = request.json
     img = data['usr_img']
     # Emotion recognition here
+    """
+        Threading
+    """
     thread_a = Compute(img)
     thread_a.start()
     thread_a.join()
-    # non_thread_emotion(img)
+    """
+        Multiprocessing
+    """
+    # f = _pool.apply_async(non_thread_emotion, [img, bufferCount])
+    #
+    # bufferCount = bufferCount + 1
+    # r = f.get(timeout=10)
+    # emotions.extend(r)
+
+    """
+        Processes
+    """
+    # p = Process(target=non_thread_emotion, args=(img, bufferCount, emotions))
+    # bufferCount = bufferCount + 1
+    # taskQueue.append(p)
+    # p.start()
+    # p.join()
     return {"res": "1"}
 
 
 @app.route('/response', methods=['GET'])
 def resp():
     global emotions, taskQueue, bufferCount
+    """
+        Threading
+    """
     while len(taskQueue):
         time.sleep(1)
+
+    """
+        Multiprocessing
+    """
+    # for p in taskQueue:
+    #     p.join(timeout=10)
+    #     while p.is_alive():
+    #         time.sleep(1)
     emo_votes = emotion_voting(emotions)
     emotions = []
-    emo_votes = [x.lower() for x in emo_votes]
+    # emo_votes = [x.lower() for x in emo_votes]
     resp = recommender_system.emotional_response(emo_votes)
     bufferCount = 0
     return {"response": resp}
@@ -184,4 +227,15 @@ def long_question():
                            correct=quest['correct'])
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    emotions = []
+    taskQueue = []
+    thresh = 0.1
+    bufferCount = 0
+    _pool = Pool(processes=4)
+    try:
+        # insert production server deployment code
+        app.run(port=8001, debug=True)
+    except KeyboardInterrupt:
+        _pool.close()
+        _pool.join()
+
