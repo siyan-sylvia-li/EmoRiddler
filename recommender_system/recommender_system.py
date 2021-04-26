@@ -30,12 +30,14 @@ def get_response(emotion_vector, response_dict):
     best_responses = max(scores.items(), key=operator.itemgetter(0))[1]
     return best_responses[np.random.randint(len(best_responses))]
 
+def get_weighted_vector(vector, num):
+  new_vector = [v*num for v in vector]
+  return new_vector
 
 def get_avg_emotion(emotions, emotion_dict):
-    # This function can get a vector for the average emotion based on the set of emotions obtained from the user
-    emotion_values = [emotion_dict[e] for e in emotions]
+    # This function can get a vector for the average emotion based on the dictionary of emotions obtained from the user
+    emotion_values = [get_weighted_vector(emotion_dict[e],emotions[e]) for e in emotions.keys() if emotions[e]!=0]
     averages = np.mean(emotion_values, axis=0)
-    res = [int(a >= 0.5) for a in averages]
     return averages
 
 
