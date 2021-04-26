@@ -110,22 +110,6 @@ def partID():
     return {'partID': session['partID']}
 
 
-# def non_thread_emotion(img):
-#     global emotions
-#     with urllib.request.urlopen(img) as response:
-#         data = response.read()
-#     with open("static/imgs/buffer.png", "wb+") as f:
-#         f.write(data)
-#     print("start")
-#     # emo_labels = emotion_recognition(self.img)
-#     # session['emotions'].extend(emo_labels)
-#     img = cv2.imread("static/imgs/buffer.png")
-#     detector = FER(mtcnn=True)
-#     emo, score = detector.top_emotion(img)
-#     emotions.append(emo)
-#     print("done")
-
-
 @app.route('/emotion', methods=['POST'])
 def emotion():
     global bufferCount
