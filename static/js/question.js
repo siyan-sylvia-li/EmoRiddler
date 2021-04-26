@@ -6,16 +6,18 @@ function registerChoice(choice) {
     // Amber - sand
     const opts = ['a', 'b', 'c', 'd']
     for (var o in opts) {
-        console.log(o)
         const opt = document.getElementById(opts[o] + 'Opt')
         const ch = document.getElementById(opts[o] + 'Choice')
-        if (opts[o] !== choice) {
-            opt.className = opt.className.replace(' w3-amber', ' w3-cyan')
-            ch.className = ch.className.replace(' w3-sand', ' w3-pale-blue')
-        } else {
-            opt.className = opt.className.replace(' w3-cyan', ' w3-amber')
-            ch.className = ch.className.replace(' w3-pale-blue', ' w3-sand')
+        if ((opt !== null) && (ch !== null)) {
+            if (opts[o] !== choice) {
+                opt.className = opt.className.replace(' w3-amber', ' w3-cyan')
+                ch.className = ch.className.replace(' w3-sand', ' w3-pale-blue')
+            } else {
+                opt.className = opt.className.replace(' w3-cyan', ' w3-amber')
+                ch.className = ch.className.replace(' w3-pale-blue', ' w3-sand')
+            }
         }
+
     }
     questNum = parseInt(sessionStorage.getItem('page')) - startNum;
     sessionStorage.setItem(questNum.toString() + "Choice", choice);
@@ -25,12 +27,12 @@ async function displayResults() {
     document.getElementById("next").disabled = true;
     const correct = document.getElementById("correctWrap")
     correct.className = correct.className + " w3-show";
-    for (var count = 0;  count < 5; count = count + 1) {
+    for (var count = 0;  count < 10; count = count + 1) {
         // setTimeout(async function(){
         //     await uploadSnap();
         // }, 1000);
         uploadSnap();
-        await delay(1000);
+        await delay(500);
     }
     console.log("UPLOAD SNAPS")
     const correctAns = document.getElementById("correctAns").innerText.toLowerCase();
@@ -115,4 +117,16 @@ function updateUI(result) {
     setTimeout(function () {
         popup.className = popup.className.replace(" w3-show", "");
     }, 3000);
+}
+
+function calculateCorrect() {
+    var corrCount = 0;
+    for (var i = 1; i < 13; i = i + 1) {
+        const questKey = i.toString() + "Choice"
+        const cor = sessionStorage.getItem(questKey)
+        if ((cor !== null) && (cor === 'correct')) {
+            corrCount = corrCount + 1;
+        }
+    }
+    return corrCount;
 }

@@ -1,0 +1,8 @@
+{
+  "question": "Susan drives from city A to city B. After two hours of driving she noticed that she covered 80 km and calculated that, if she continued driving at the same speed, she would end up been 15 minutes late. So she increased her speed by 10 km/hr and she arrived at city B 36 minutes earlier than she planned.\nFind the distance between cities A and B.",
+  "choiceA": "250 km",
+  "choiceB": "200 km",
+  "choiceC": "300 km",
+  "choiceD": "150 km",
+  "correct": "A"
+}

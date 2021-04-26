@@ -103,6 +103,12 @@ def feedback():
     return render_template('feedback.html', partID=session['partID'], time=str(session['time']))
 
 
+@app.route('/final')
+def final():
+    score = request.args.get('count')
+    return render_template('final_page.html', score=str(score))
+
+
 @app.route('/partID', methods=['POST'])
 def partID():
     data = request.json
@@ -142,6 +148,34 @@ def question():
     with open('static/questions/q' + str(questNum) + '.json') as f:
         quest = json.load(f)
     return render_template('question.html', questionNum=str(questNum),
+                           question=quest['question'],
+                           choiceA=quest['choiceA'],
+                           choiceB=quest['choiceB'],
+                           choiceC=quest['choiceC'],
+                           choiceD=quest['choiceD'],
+                           correct=quest['correct'])
+
+
+@app.route('/small_question')
+def small_question():
+    questNum = int(request.args.get('questNum'))
+    with open('static/questions/q' + str(questNum) + '.json') as f:
+        quest = json.load(f)
+    return render_template('small_question.html', questionNum=str(questNum),
+                           question=quest['question'],
+                           choiceA=quest['choiceA'],
+                           choiceB=quest['choiceB'],
+                           choiceC=quest['choiceC'],
+                           choiceD=quest['choiceD'],
+                           correct=quest['correct'])
+
+
+@app.route('/long_question')
+def long_question():
+    questNum = int(request.args.get('questNum'))
+    with open('static/questions/q' + str(questNum) + '.json') as f:
+        quest = json.load(f)
+    return render_template('long_question.html', questionNum=str(questNum),
                            question=quest['question'],
                            choiceA=quest['choiceA'],
                            choiceB=quest['choiceB'],

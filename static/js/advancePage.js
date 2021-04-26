@@ -1,6 +1,6 @@
 const startNum = 2;
-const endNum = 20;
-const evalInterval = 5;
+const endNum = 15;
+const evalInterval = 6;
 function movePage(direction) {
     $( "#display-content" ).empty();
     // Load items for the specific page
@@ -14,18 +14,28 @@ function movePage(direction) {
         } else {
             const qNum = (page - startNum) - Math.floor((page - startNum) / evalInterval)
             // Load questions
-            $('#display-content').load('/question?questNum=' + qNum.toString())
+            if ((qNum === 7) || (qNum === 10)) {
+                $('#display-content').load('/small_question?questNum=' + qNum.toString())
+            } else if (qNum === 2) {
+                $('#display-content').load('/long_question?questNum=' + qNum.toString())
+            } else {
+                $('#display-content').load('/question?questNum=' + qNum.toString())
+            }
             if (sessionStorage.getItem(qNum.toString() + "Choice") !== null) {
                 // Need to clear choices
                 sessionStorage.removeItem(qNum.toString() + "Choice");
             }
         }
 
-    } else {
+    } else if (page <= startNum) {
         $('#display-content').load('/p' + sessionStorage.getItem('page'));
         if (page === startNum) {
             updateUI({'response': "Hi, I'm Mindy. Let's Do This! :)"})
         }
+    } else {
+        // Calculate the number of items correct
+        const cCount = calculateCorrect();
+        $('#display-content').load('/final?count=' + cCount.toString());
     }
 
     // const prev = document.getElementById('prev');

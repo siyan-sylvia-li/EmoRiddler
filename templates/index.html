@@ -2,7 +2,6 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
     <style type="text/css">
         html, body {
             height: 100%;
@@ -20,14 +19,14 @@
          class="w3-panel w3-pale-green w3-center w3-hide">
         <p>Some alert</p>
     </div>
-    <div id="container" style="display: inline-block;">
+    <div id="container" style="display: inline-block; max-width: 20vw;">
         <div class="w3-container w3-margin-bottom w3-margin-top" style="background-color: floralwhite" id="videoWrap">
             <video id="videoElement" style="width: 18vw; height: 20vh;" autoplay ></video>
 <!--            autoplay="true" id="videoElement" class= "w3-center w3-margin-top"
                    style="width: 18vw; height: auto;"-->
 <!--            <canvas class="w3-center w3-margin-top" id="canvas"></canvas>-->
         </div>
-        <div class="w3-margin-left">
+        <div class="w3-margin-left" style="max-width: 20vw;">
             <div class="w3-container w3-teal">
                 <h3>Agent Feedback</h3>
             </div>
