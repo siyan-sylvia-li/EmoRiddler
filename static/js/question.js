@@ -27,7 +27,7 @@ async function displayResults() {
     document.getElementById("next").disabled = true;
     const correct = document.getElementById("correctWrap")
     correct.className = correct.className + " w3-show";
-    for (var count = 0;  count < 10; count = count + 1) {
+    for (var count = 0;  count < 5; count = count + 1) {
         // setTimeout(async function(){
         //     await uploadSnap();
         // }, 1000);
