@@ -1,0 +1,8 @@
+{
+  "question": "You are a baker, and you have 253 loaves of bread and 152 donuts. You are making 13 more loaves of bread and 4 donuts, while a boy bought 7 donuts and 17 loaves of bread. How many loaves of bread and donuts do you still have?",
+  "choiceA": "398",
+  "choiceB": "264",
+  "choiceC": "402",
+  "choiceD": "153",
+  "correct": "A"
+}
