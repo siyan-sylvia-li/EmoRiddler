@@ -25,6 +25,14 @@ app.config.from_object(__name__)
 Session(app)
 CORS(app)
 
+emotions = []
+taskQueue = []
+thresh = 0.1
+bufferCount = 0
+_pool = Pool(processes=4)
+with open('static/random_positive.txt', 'r') as f:
+    rand_responses = [x.replace("\n", "") for x in f.readlines()]
+
 
 class Compute(Thread):
     def __init__(self, img):
@@ -250,13 +258,6 @@ def long_question():
                            correct=quest['correct'])
 
 if __name__ == '__main__':
-    emotions = []
-    taskQueue = []
-    thresh = 0.1
-    bufferCount = 0
-    _pool = Pool(processes=4)
-    with open('static/random_positive.txt', 'r') as f:
-        rand_responses = [x.replace("\n", "") for x in f.readlines()]
     try:
         # insert production server deployment code
         app.run(port=8001, debug=True)
