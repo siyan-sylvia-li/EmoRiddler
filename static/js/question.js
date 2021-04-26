@@ -1,5 +1,6 @@
 var questNum;
 const name = "Mindy";
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function registerChoice(choice) {
     // Amber - sand
@@ -20,14 +21,16 @@ function registerChoice(choice) {
     sessionStorage.setItem(questNum.toString() + "Choice", choice);
 }
 
-function displayResults() {
+async function displayResults() {
     document.getElementById("next").disabled = true;
     const correct = document.getElementById("correctWrap")
     correct.className = correct.className + " w3-show";
-    for (var count = 0;  count < 10; count = count + 1) {
-        setTimeout(function(){
-            uploadSnap();
-        }, 500);
+    for (var count = 0;  count < 5; count = count + 1) {
+        // setTimeout(async function(){
+        //     await uploadSnap();
+        // }, 1000);
+        uploadSnap();
+        await delay(1000);
     }
     console.log("UPLOAD SNAPS")
     const correctAns = document.getElementById("correctAns").innerText.toLowerCase();

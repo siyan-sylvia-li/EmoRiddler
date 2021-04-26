@@ -2,6 +2,7 @@ const feedback = document.getElementById('feedback-content');
 const popup = document.getElementById("popup");
 
 function uploadSnap() {
+    console.log("Take")
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     var uri = canvas.toDataURL('image/png')
     fetch('/emotion', {
