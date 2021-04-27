@@ -130,7 +130,7 @@ def pg0():
 
 @app.route('/p1')
 def pg1():
-    return render_template('page_1.html', cond=str(session['cond']))
+    return render_template('page_1.html', cond=str(session['cond']), partID=session['partID'])
 
 
 @app.route('/p2')
@@ -147,7 +147,7 @@ def feedback():
 @app.route('/final')
 def final():
     score = request.args.get('count')
-    return render_template('final_page.html', score=str(score), cond=str(session['cond']))
+    return render_template('final_page.html', score=str(score), cond=str(session['cond']), partID=session['partID'])
 
 
 @app.route('/partID', methods=['POST'])
